@@ -25,6 +25,12 @@ if [ -n "$pidfiles" ]; then
   echo "$pidfiles" | xargs rm -f
 fi
 
+echo "PRD_RAPID_REPO_MASTER:"
+echo $PRD_RAPID_REPO_MASTER
+
+echo "PRD_RAPID_USE_STREAMER:"
+echo $PRD_RAPID_USE_STREAMER
+
 if [ ! -d "${SPRING_DATADIR}/games" ] || [ -z "$(ls -A ${SPRING_DATADIR}/games/ 2>/dev/null)" ]; then
   echo "Downloading BAR game data (first run only)..."
   /spring-engines/latest/pr-downloader \
