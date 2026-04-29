@@ -1,9 +1,6 @@
 FROM docker.io/debian:trixie-slim
 
-RUN mkdir -p /opt/spads
-
-RUN if [ ! -d "/opt/spads" ] || [ ! -z "$( ls -A /opt/spads )" ]; then { echo "/opt/spads must be a bind mount of an empty directory from host filesystem"; exit 1; } ; fi \
-  && apt-get -y update \
+RUN apt-get -y update \
   && apt-get -y upgrade \
   && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
   ca-certificates \
@@ -17,10 +14,8 @@ RUN if [ ! -d "/opt/spads" ] || [ ! -z "$( ls -A /opt/spads )" ]; then { echo "/
   libinline-python-perl \
   && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /opt/spads
+
 WORKDIR /opt/spads
-RUN wget http://planetspads.free.fr/spads/installer/spadsInstaller.tar -qO - | tar x
-RUN perl spadsInstaller.pl --auto BarLanServerTest
 
 EXPOSE 8200/tcp 8452/udp
-
-ENTRYPOINT ["/dev-entrypoint.sh"]

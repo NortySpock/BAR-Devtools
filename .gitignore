@@ -12,6 +12,9 @@ lua-doc-extractor
 SPADS/
 SpringLobbyInterface/
 
+#spads cache data (empty folder to reset spads install)
+spads_data/
+
 # Personal config overrides
 repos.local.conf
 .env

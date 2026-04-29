@@ -49,10 +49,10 @@ services:
       start_period: 180s
 
   spads:
-    build:
-      context: ./SPADS
-      dockerfile: ../docker/spads.dev.Dockerfile
     profiles: ["spads"]
+    build:
+      context: ./docker
+      dockerfile: spads.dev.Dockerfile
     depends_on:
       teiserver:
         condition: service_healthy
@@ -74,11 +74,13 @@ services:
       PRD_RAPID_USE_STREAMER: false
       PRD_RAPID_REPO_MASTER: https://repos.beyondallreason.dev/repos.gz
     volumes:
+      - ./spads_data:/opt/spads
       - ./docker/spads-dev-entrypoint.sh:/dev-entrypoint.sh:ro,z
       - ./docker/spads_dev.conf:/spads_dev.conf:ro,z
       - ./spads_config_bar/etc:/spads_etc:ro,z
       - ./spads_config_bar/var:/spads_var:ro,z
       - spring_data:/spring-data
+      - spads_cache:/opt/spads/var
       - spring_engines:/spring-engines
 
 

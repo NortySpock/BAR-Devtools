@@ -8,6 +8,13 @@ _term() {
 }
 trap _term SIGTERM SIGINT
 
+# Download and install SPADS if not already present
+if [ ! -f "spads.pl" ]; then
+  echo "Downloading and installing SPADS..."
+  wget http://planetspads.free.fr/spads/installer/spadsInstaller.tar -qO - | tar x
+  perl spadsInstaller.pl --auto BarLanServerTest
+fi
+
 cp -R /spads_etc/* /opt/spads/etc/ 2>/dev/null || true
 cp -R /spads_var/* /opt/spads/var/ 2>/dev/null || true
 
