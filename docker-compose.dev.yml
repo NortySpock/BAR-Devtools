@@ -56,16 +56,16 @@ services:
     depends_on:
       teiserver:
         condition: service_healthy
-    network_mode: host
-    entrypoint: ["/bin/bash", "/dev-entrypoint.sh"]
+    # network_mode: host
+    #entrypoint: ["/bin/bash", "/dev-entrypoint.sh"]
     environment:
-      SPADS_LOBBY_HOST: "127.0.0.1"
+      SPADS_LOBBY_HOST: "teiserver"
       SPADS_LOBBY_LOGIN: spadsbot
       SPADS_LOBBY_PASSWORD: password
       SPADS_REGISTRATION_EMAIL: spads@spads.local
       SPADS_BASEAUTOHOST_PORT: "54200"
       SPADS_BATTLENAME_PREFIX: '"DEV - "'
-      SPADS_LAN_IP: "127.0.0.1"
+      SPADS_LAN_IP: "0.0.0.0"
       SPADS_PLUGINS: '"AutoRegister;BarManager;RatingManager"'
       SPRING_DATADIR: /spring-data
       SPRING_WRITEDIR: /spring-data
@@ -73,15 +73,15 @@ services:
       SPADS_ARGS: "--tls-cert-trust"
       PRD_RAPID_USE_STREAMER: false
       PRD_RAPID_REPO_MASTER: https://repos.beyondallreason.dev/repos.gz
-    volumes:
-      - ./spads_data:/opt/spads
-      - ./docker/spads-dev-entrypoint.sh:/dev-entrypoint.sh:ro,z
-      - ./docker/spads_dev.conf:/spads_dev.conf:ro,z
-      - ./spads_config_bar/etc:/spads_etc:ro,z
-      - ./spads_config_bar/var:/spads_var:ro,z
-      - spring_data:/spring-data
-      - spads_cache:/opt/spads/var
-      - spring_engines:/spring-engines
+    #volumes:
+      #- ./spads_data:/opt/spads
+      #- ./docker/spads-dev-entrypoint.sh:/dev-entrypoint.sh:ro,z
+      #- ./docker/spads_dev.conf:/spads_dev.conf:ro,z
+      #- ./spads_config_bar/etc:/spads_etc:ro,z
+      #- ./spads_config_bar/var:/spads_var:ro,z
+      #- spring_data:/spring-data
+      #- spads_cache:/opt/spads/var
+      #- spring_engines:/spring-engines
 
 
   recoil-docs:

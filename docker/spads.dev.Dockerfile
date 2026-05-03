@@ -17,5 +17,9 @@ RUN apt-get -y update \
 RUN mkdir -p /opt/spads
 
 WORKDIR /opt/spads
+RUN wget http://planetspads.free.fr/spads/installer/spadsInstaller.tar -qO - | tar x
+RUN perl spadsInstaller.pl --auto BarLanServerTest
 
 EXPOSE 8200/tcp 8452/udp
+
+ENTRYPOINT ["/usr/bin/perl","spads.pl","etc/spads.conf"]
